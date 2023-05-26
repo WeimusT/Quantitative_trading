@@ -11,6 +11,7 @@ Most trading strategies are adapted from the book [Quantitative Trading: How to 
 
 # Todo
 Pair trade [NASDAQ BUG](https://www.globalxetfs.com/funds/bug/) ETF and S&P 500.
+Install [backtesting.py](https://kernc.github.io/backtesting.py/)
 
 # References
 [Factor Models and Principal Component Analysis](http://www.fsb.miamioh.edu/lij14/672_2014_s10.pdf)
