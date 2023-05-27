@@ -1,14 +1,19 @@
+import os
+from datetime import datetime
 import pandas as pd
 import matplotlib.pyplot as plt
+import yfinance as yf
 
-def plot_candle_stick(df, price_col=["Open", "High", "Low", "Close"], **kwargs):
+def plot_candle_stick(df:pd.DataFrame, price_col:list=["Open", "High", "Low", "Close"], **kwargs) -> None:
     """Plot the candle stick chart.
-    Args
-    ----
+    
+    Parameters
+    ----------
     df: pandas.DataFrame
         The data.
     price_col: list
         The column name for Open, High, Low and Close in sequence.
+    
     Returns
     -------
     None
@@ -55,3 +60,33 @@ def plot_candle_stick(df, price_col=["Open", "High", "Low", "Close"], **kwargs):
     plt.xlabel('Date')
     plt.ylabel('Price (USD)')
     plt.show()
+
+def download_yf(ticker:str, period:str, interval:str="1d", path:str=None) -> pd.DataFrame:
+    """Download OHLC data from yahoo finance.
+
+    Parameters
+    ----------
+    ticker: str
+        Ticker.
+    period: str
+        Length of the data, e.g. '2y', '1mo'.
+    interval: str
+        Data interval, e.g. '1d' for daily data.
+    path: str
+        The path to save the data. The data is saved as CSV. If not specified then
+        the data is not saved.
+
+    Returns
+    -------
+    pandas.DataFrame
+    """
+    tenb_ticker = yf.Ticker(ticker)
+    tenb_df = tenb_ticker.history(period=period, interval=interval, auto_adjust=True)
+    if path is not None:
+        # Save to local
+        first_date = datetime.strftime(tenb_df.index.min(), "%Y%m%d")
+        last_date = datetime.strftime(tenb_df.index.max(), "%Y%m%d")
+        filename = "%s_%s_%s_%s.csv" % (ticker.lower(), first_date, last_date, interval.lower())
+        filepath = os.path.join(path, filename)
+        tenb_df.to_csv(filepath, index=True)
+    return tenb_df
