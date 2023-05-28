@@ -8,7 +8,7 @@ Most trading strategies are adapted from the book [Quantitative Trading: How to 
 - Pair trading: Trade ETF spread. 
 - Sharpe Ratio: Sharpe ratio is a ratio of expected return and risk. Some simple strategies such as buy and hold are implemented to explain Sharpe ratio.
 - Statistical Factor Model: Use Principal Component Regression (PCR) to explain the variation expected return prediction.
-- KDJ
+- KDJ. KDJ implementation is based on [Qbot implementation](https://github.com/UFund-Me/Qbot/blob/main/pytrader/doc/04.kdj_with_macd/kdj.py).
 
 ![KDJ TENB](res/TENB_KDJ.png)
 
